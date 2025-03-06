@@ -1,0 +1,388 @@
+/* Reset defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light mode (default) */
+    --background-gradient-start: #e0eafc;
+    --background-gradient-end: #cfdef3;
+    --card-background: white;
+    --text-color: #333;
+    --header-footer-bg: #6a11cb;
+    --header-footer-text: white;
+    --task-title-color: #6a11cb;
+    --input-border: #ddd;
+    --input-focus-border: #6a11cb;
+    --table-header-bg: #f5f5f5;
+    --table-border: #eee;
+    --completed-bg: #d4edda;
+    --pending-bg: #fff3cd;
+    --completed-text: #155724;
+    --pending-text: #856404;
+    --button-primary: #6a11cb;
+    --button-hover-primary: #2575fc;
+    --button-secondary: #2575fc;
+    --button-hover-secondary: #1a5bc8;
+    --button-warning: #ffc107;
+    --button-hover-warning: #e0a800;
+    --button-danger: #dc3545;
+    --button-hover-danger: #c82333;
+    --button-gray: #6c757d;
+    --button-hover-gray: #5a6268;
+    --hover-row-bg: #f9f9f9;
+    --odd-row-bg: #ffffff;
+    --even-row-bg: #e6f7e6;
+}
+
+.dark-mode {
+    /* Dark mode (improved) */
+    --background-gradient-start: #1e1e2f; /* Deep slate with a hint of blue */
+    --background-gradient-end: #2a2a3b;   /* Slightly lighter slate */
+    --card-background: #33334d;           /* Lighter dark shade for cards */
+    --text-color: #e0e0e0;               /* Soft off-white for less strain */
+    --header-footer-bg: #5a189a;         /* Richer purple for header/footer */
+    --header-footer-text: #ffffff;
+    --task-title-color: #c4b5fd;         /* Brighter, softer purple */
+    --input-border: #555570;             /* Subtle grayish-blue */
+    --input-focus-border: #8b5cf6;       /* Vibrant purple for focus */
+    --table-header-bg: #44445e;          /* Slightly lighter for contrast */
+    --table-border: #666680;             /* Softer grayish border */
+    --completed-bg: #2f5e44;             /* Muted green for completed */
+    --pending-bg: #5e4b2f;               /* Muted amber for pending */
+    --completed-text: #b8e0c8;           /* Light green text */
+    --pending-text: #f0d7a0;             /* Light amber text */
+    --button-primary: #8b5cf6;           /* Vibrant purple */
+    --button-hover-primary: #7c3aed;     /* Slightly darker purple */
+    --button-secondary: #3b82f6;         /* Bright blue */
+    --button-hover-secondary: #2563eb;   /* Darker blue */
+    --button-warning: #d97706;           /* Warm amber */
+    --button-hover-warning: #b45309;     /* Darker amber */
+    --button-danger: #b91c1c;            /* Deep red */
+    --button-hover-danger: #991b1b;      /* Darker red */
+    --button-gray: #6b7280;              /* Neutral gray */
+    --button-hover-gray: #4b5563;        /* Darker gray */
+    --hover-row-bg: #3c3c54;             /* Subtle hover shade */
+    --odd-row-bg: #33334d;               /* Matches card background */
+    --even-row-bg: #3c3c54;              /* Slightly lighter for contrast */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 2rem;
+    background: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Dark mode toggle styling */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.dark-mode-toggle input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.dark-mode-toggle input:checked + .toggle-slider {
+    background-color: var(--button-primary);
+}
+
+.toggle-slider::after {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: transform 0.3s;
+}
+
+.dark-mode-toggle input:checked + .toggle-slider::after {
+    transform: translateX(20px);
+}
+
+/* Main content */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Add Task Section */
+.add-task {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.add-task h2 {
+    font-size: 1.5rem;
+    color: var(--task-title-color);
+    margin-bottom: 1rem;
+}
+
+.add-task form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-task input[type="text"] {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.add-task input[type="text"]:focus {
+    border-color: var(--input-focus-border);
+}
+
+.add-task label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.add-task button {
+    padding: 0.75rem;
+    background: var(--button-primary);
+    color: var(--header-footer-text);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-task button:hover {
+    background: var(--button-hover-primary);
+}
+
+/* Task List Section (Table) */
+.task-list {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-list h2 {
+    font-size: 1.5rem;
+    color: var(--task-title-color);
+    margin-bottom: 1rem;
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.task-table th,
+.task-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--table-border);
+}
+
+.task-table th {
+    background: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--task-title-color);
+}
+
+.task-row {
+    transition: background 0.3s;
+}
+
+.task-row:hover {
+    background: var(--hover-row-bg);
+}
+
+.odd-row {
+    background: var(--odd-row-bg); /* Whitish for odd rows */
+}
+
+.even-row {
+    background: var(--even-row-bg); /* Light greenish for even rows */
+}
+
+.task-title {
+    font-weight: 500;
+}
+
+.task-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.task-status.completed {
+    background: var(--completed-bg);
+    color: var(--completed-text);
+}
+
+.task-status:not(.completed) {
+    background: var(--pending-bg);
+    color: var(--pending-text);
+}
+
+.toggle-btn {
+    padding: 0.5rem 1rem;
+    background: var(--button-secondary);
+    color: var(--header-footer-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background 0.3s;
+}
+
+.toggle-btn:hover {
+    background: var(--button-hover-secondary);
+}
+
+.edit-btn {
+    padding: 0.5rem 1rem;
+    background: var(--button-warning);
+    color: #212529;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background 0.3s;
+}
+
+.edit-btn:hover {
+    background: var(--button-hover-warning);
+}
+
+.delete-btn {
+    padding: 0.5rem 1rem;
+    background: var(--button-danger);
+    color: var(--header-footer-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background: var(--button-hover-danger);
+}
+
+/* Cancel Button */
+#cancel-btn {
+    padding: 0.75rem;
+    background: var(--button-gray);
+    color: var(--header-footer-text);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#cancel-btn:hover {
+    background: var(--button-hover-gray);
+}
+
+/* Task Description Textarea */
+#task-description {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 80px;
+    margin: 0.5rem 0;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#task-description:focus {
+    border-color: var(--input-focus-border);
+}
+
+/* Task Description in Table */
+.task-description {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    header h1 { font-size: 2rem; }
+    .add-task, .task-list { padding: 1rem; }
+    .task-table th,
+    .task-table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    .task-table button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
